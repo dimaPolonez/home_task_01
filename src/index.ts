@@ -25,10 +25,10 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
 
-    if (!title || !title.trim() || typeof(title) !== "string") {
+    if (!title || !title.trim() || typeof title !== "string") {
         res
             .status(400)
-            .json({
+            .send({
                 errorsMessages: [
                     {
                         "message": "Incorrect values",
@@ -39,10 +39,10 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         return;
     }
 
-    if (!author || !author.trim() || typeof(author) !== "string") {
+    if (!author || !author.trim() || typeof author !== "string") {
         res
             .status(400)
-            .json({
+            .send({
                 errorsMessages: [
                     {
                         "message": "Incorrect values",
@@ -95,10 +95,10 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
 
-    if (!title || !title.trim() || typeof(title) !== "string") {
+    if (!title || !title.trim() || typeof title !== "string") {
         res
             .status(400)
-            .json({
+            .send({
                 errorsMessages: [
                     {
                         "message": "Incorrect values",
@@ -109,10 +109,10 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
         return;
     }
 
-    if (!author || !author.trim() || typeof(author) !== "string") {
+    if (!author || !author.trim() || typeof author !== "string") {
         res
             .status(400)
-            .json({
+            .send({
                 errorsMessages: [
                     {
                         "message": "Incorrect values",

@@ -22,6 +22,37 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
+    const title = req.body.title;
+    const author = req.body.author;
+
+    if (!title || !title.trim() || typeof(title) !== "string") {
+        res
+            .status(400)
+            .json({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "title"
+                    }
+                ]
+            })
+        return;
+    }
+
+    if (!author || !author.trim() || typeof(author) !== "string") {
+        res
+            .status(400)
+            .json({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "author"
+                    }
+                ]
+            })
+        return;
+    }
+
     const newVideo = {
         id: +(new Date()),
         title: req.body.title, author: req.body.author,
@@ -58,6 +89,37 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     if (!findId) {
         res.sendStatus(404)
+        return;
+    }
+
+    const title = req.body.title;
+    const author = req.body.author;
+
+    if (!title || !title.trim() || typeof(title) !== "string") {
+        res
+            .status(400)
+            .json({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "title"
+                    }
+                ]
+            })
+        return;
+    }
+
+    if (!author || !author.trim() || typeof(author) !== "string") {
+        res
+            .status(400)
+            .json({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "author"
+                    }
+                ]
+            })
         return;
     }
 

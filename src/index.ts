@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express'
 
-const app = express()
+export const app = express()
 const port = process.env.PORT || 3001
 
 const parserMiddleware = express.json()
@@ -39,12 +39,11 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
-
     const newVideo = { id : +(new Date()),
         title : req.body.title, author : req.body.author,
         canBeDownloaded: true, minAgeRestriction : null,
-        createdAt : "2022-12-10T10:03:20.216Z",
-        publicationDate : "publicationDate",
+        createdAt : new Date().toISOString(),
+        publicationDate : new Date().toISOString(),
         availableResolutions : req.body.availableResolutions}
 
     bdVideos.push(newVideo)
@@ -95,12 +94,9 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     findId.minAgeRestriction = req.body.minAgeRestriction
     findId.publicationDate = req.body.publicationDate
     res.sendStatus(204)
-
-
 })
 
 app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
-
     if (!req.params.id) {
         res.sendStatus(404)
         return;
@@ -110,8 +106,14 @@ app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     res.sendStatus(204)
 })
-app.delete('/ht_01/api/testing/all-data', (req: Request, res: Response) => {
 
+app.delete('/ht_01/api/testing/all-data', (req: Request, res: Response) => {
+    bdVideos = []
+
+    res.sendStatus(204)
+})
+
+app.delete('/_test_/data', (req: Request, res: Response) => {
     bdVideos = []
 
     res.sendStatus(204)

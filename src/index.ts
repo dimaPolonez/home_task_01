@@ -60,7 +60,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         title: req.body.title, author: req.body.author,
         canBeDownloaded: true, minAgeRestriction: null,
         createdAt: new Date().toISOString(),
-        publicationDate: new Date(newDate.setDate(newDate.getDate() + 1)).toISOString(),
+        publicationDate: new Date(newDate.setDate(newDate.getDate() + 2)).toISOString(),
         availableResolutions: req.body.availableResolutions
     }
 

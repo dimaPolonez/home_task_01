@@ -11,7 +11,7 @@ const newDate = new Date();
 
 const newDateCreated = newDate.toISOString();
 
-const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 2)).toISOString();
+const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString();
 
 
 

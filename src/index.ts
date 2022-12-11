@@ -7,12 +7,14 @@ const parserMiddleware = express.json()
 
 app.use(parserMiddleware)
 
+const newDate = new Date();
+
 let bdVideos = [
     {
         id: 1, title: "Video0", author: "Author0",
         canBeDownloaded: true, minAgeRestriction: null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString(),
+        createdAt: newDate.toISOString(),
+        publicationDate: new Date(newDate.setDate(newDate.getDate() - 1)).toISOString(),
         availableResolutions: ["P144"]
     }
 ]
@@ -58,7 +60,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         title: req.body.title, author: req.body.author,
         canBeDownloaded: true, minAgeRestriction: null,
         createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString(),
+        publicationDate: new Date(newDate.setDate(newDate.getDate() - 1)).toISOString(),
         availableResolutions: req.body.availableResolutions
     }
 

@@ -14,28 +14,7 @@ let bdVideos = [
         createdAt: new Date().toISOString(),
         publicationDate: new Date().toISOString(),
         availableResolutions: ["P144"]
-    },
-    {
-        id: 2, title: "Video1", author: "Author1",
-        canBeDownloaded: true, minAgeRestriction: null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString(),
-        availableResolutions: ["P144"]
-    },
-    {
-        id: 3, title: "Video2", author: "Author2",
-        canBeDownloaded: true, minAgeRestriction: null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString(),
-        availableResolutions: ["P144"]
-    },
-    {
-        id: 4, title: "Video3", author: "Author3",
-        canBeDownloaded: true, minAgeRestriction: null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString(),
-        availableResolutions: ["P144"]
-    },
+    }
 ]
 
 app.get('/', (req: Request, res: Response) => {
@@ -82,19 +61,6 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
         return;
     }
 
-    /*    if ((req.body.title && req.body.author && req.body.availableResolutions && req.body.canBeDownloaded &&
-            req.body.minAgeRestriction && req.body.publicationDate) != undefined) {
-            findId.title = req.body.title
-            findId.author = req.body.author
-            findId.availableResolutions = req.body.availableResolutions
-            findId.canBeDownloaded = req.body.canBeDownloaded
-            findId.minAgeRestriction = req.body.minAgeRestriction
-            findId.publicationDate = req.body.publicationDate
-            res.sendStatus(204)
-        } else {
-            res.sendStatus(400)
-        }*/
-
     findId.title = req.body.title
     findId.author = req.body.author
     findId.availableResolutions = req.body.availableResolutions
@@ -116,12 +82,6 @@ app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 })
 
 app.delete('/ht_01/api/testing/all-data', (req: Request, res: Response) => {
-    bdVideos = []
-
-    res.sendStatus(204)
-})
-
-app.delete('/_test_/data', (req: Request, res: Response) => {
     bdVideos = []
 
     res.sendStatus(204)

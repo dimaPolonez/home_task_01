@@ -9,12 +9,18 @@ app.use(parserMiddleware)
 
 const newDate = new Date();
 
+const newDateCreated = newDate.toISOString();
+
+const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 2)).toISOString();
+
+
+
 let bdVideos = [
     {
         id: 1, title: "Video0", author: "Author0",
         canBeDownloaded: true, minAgeRestriction: null,
-        createdAt: newDate.toISOString(),
-        publicationDate: new Date(newDate.setDate(newDate.getDate() - 1)).toISOString(),
+        createdAt: newDateCreated,
+        publicationDate: newDatePublic,
         availableResolutions: ["P144"]
     }
 ]
@@ -56,11 +62,11 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     }
 
     const newVideo = {
-        id: +(new Date()),
+        id: +(newDate),
         title: req.body.title, author: req.body.author,
         canBeDownloaded: true, minAgeRestriction: null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date(newDate.setDate(newDate.getDate() + 2)).toISOString(),
+        createdAt: newDateCreated,
+        publicationDate: newDatePublic,
         availableResolutions: req.body.availableResolutions
     }
 

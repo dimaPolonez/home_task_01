@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express'
 
 const app = express()
-const port = 3001
+const port = process.env.PORT || 3001
 
 const parserMiddleware = express.json()
 
@@ -107,6 +107,12 @@ app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     }
 
     bdVideos = bdVideos.filter(v => v.id !== +req.params.id)
+
+    res.sendStatus(204)
+})
+app.delete('/ht_01/api/testing/all-data', (req: Request, res: Response) => {
+
+    bdVideos = []
 
     res.sendStatus(204)
 })

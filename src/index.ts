@@ -143,7 +143,7 @@ app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     res.sendStatus(204)
 })
 
-app.delete('/ht_01/api/testing/all-data', (req: Request, res: Response) => {
+app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
     bdVideos = []
 
     res.sendStatus(204)

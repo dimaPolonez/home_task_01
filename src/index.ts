@@ -18,7 +18,7 @@ const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOStri
 let bdVideos = [
     {
         id: 1, title: "Video0", author: "Author0",
-        canBeDownloaded: true, minAgeRestriction: null,
+        canBeDownloaded: false, minAgeRestriction: null,
         createdAt: newDateCreated,
         publicationDate: newDatePublic,
         availableResolutions: ["P144"]
@@ -64,7 +64,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const newVideo = {
         id: +(newDate),
         title: req.body.title, author: req.body.author,
-        canBeDownloaded: true, minAgeRestriction: null,
+        canBeDownloaded: false, minAgeRestriction: null,
         createdAt: newDateCreated,
         publicationDate: newDatePublic,
         availableResolutions: req.body.availableResolutions

@@ -33,6 +33,7 @@ const errAuthor = {message: "Incorrect values", field : "author"};
 const errCanBeDownloaded = {message: "Incorrect values", field : "canBeDownloaded"};
 const errResolutions = {message: "Incorrect values", field : "availableResolutions"};
 const errMinAgeRestriction = {message: "Incorrect values", field : "minAgeRestriction"};
+const errPublicationDate = {message: "Incorrect values", field : "publicationDate"};
 
     app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
@@ -119,6 +120,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const author = req.body.author;
     const canBeDownloaded = req.body.canBeDownloaded;
     const minAgeRestriction = req.body.minAgeRestriction;
+    const publicationDate = req.body.publicationDate;
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
         errorsArray.push(errTitle);
@@ -132,8 +134,12 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
         errorsArray.push(errCanBeDownloaded);
     }
 
-    if (typeof minAgeRestriction < "number" || minAgeRestriction < 1 || minAgeRestriction > 18) {
+    if (typeof minAgeRestriction != "number" || minAgeRestriction < 1 || minAgeRestriction > 18) {
         errorsArray.push(errMinAgeRestriction);
+    }
+
+    if (typeof publicationDate != "string") {
+        errorsArray.push(errPublicationDate);
     }
 
     if (errorsArray.length > 0) {

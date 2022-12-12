@@ -32,6 +32,7 @@ const errTitle = {message: "Incorrect values", field : "title"};
 const errAuthor = {message: "Incorrect values", field : "author"};
 const errCanBeDownloaded = {message: "Incorrect values", field : "canBeDownloaded"};
 const errResolutions = {message: "Incorrect values", field : "availableResolutions"};
+const errMinAgeRestriction = {message: "Incorrect values", field : "minAgeRestriction"};
 
     app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
@@ -117,6 +118,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
     const canBeDownloaded = req.body.canBeDownloaded;
+    const minAgeRestriction = req.body.minAgeRestriction;
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
         errorsArray.push(errTitle);
@@ -128,6 +130,10 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     if (typeof canBeDownloaded != "boolean") {
         errorsArray.push(errCanBeDownloaded);
+    }
+
+    if (typeof minAgeRestriction < "number" || minAgeRestriction < 1 || minAgeRestriction > 18) {
+        errorsArray.push(errMinAgeRestriction);
     }
 
     if (errorsArray.length > 0) {

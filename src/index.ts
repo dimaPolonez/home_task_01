@@ -53,7 +53,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
 
     if (errorsArray.length > 0 ) {
         res
-            .sendStatus(400)
+            .status(400)
             .send(
                 {"errorsMessages": errorsArray})
         return;
@@ -130,7 +130,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     if (errorsArray.length > 0 ) {
         res
-            .sendStatus(400)
+            .status(400)
             .send(
                 {"errorsMessages": errorsArray})
         return;

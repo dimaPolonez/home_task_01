@@ -23,9 +23,11 @@ let bdVideos = [
     }
 ]
 
-let errorsArray: any = [];
+let errorsArray = [];
+const errTitle = {message: "Incorrect values", field : "title"};
+const errAuthor = {message: "Incorrect values", field : "title"};
 
-app.get('/', (req: Request, res: Response) => {
+    app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
 })
 
@@ -34,11 +36,11 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const author = req.body.author;
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
-        errorsArray.push({message: "Incorrect values", field : "title"});
+        errorsArray.push(errTitle);
     }
 
     if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
-        errorsArray.push({message: "Incorrect values", field : "author"});
+        errorsArray.push(errAuthor);
     }
     if (errorsArray.length > 0) {
         res
@@ -98,11 +100,11 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const author = req.body.author;
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
-        errorsArray.push({message: "Incorrect values", field : "title"});
+        errorsArray.push(errTitle);
     }
 
     if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
-        errorsArray.push({message: "Incorrect values", field : "author"});
+        errorsArray.push(errAuthor);
     }
     if (errorsArray.length > 0) {
         res

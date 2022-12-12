@@ -24,6 +24,8 @@ let bdVideos = [
 ]
 
 let errorsArray: Array<object> = [];
+let errors = {errorsMessages: errorsArray};
+
 const errTitle = {message: "Incorrect values", field : "title"};
 const errAuthor = {message: "Incorrect values", field : "title"};
 
@@ -35,6 +37,8 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
 
+    errorsArray = [];
+
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
         errorsArray.push(errTitle);
     }
@@ -45,9 +49,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     if (errorsArray.length > 0) {
         res
             .status(400)
-            .send({
-                errorsMessages: errorsArray
-            })
+            .send(errors)
         return;
     }
 
@@ -84,6 +86,7 @@ app.get('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 })
 
 app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
+    errorsArray = [];
     let findId = bdVideos.find(v => v.id === +req.params.id)
 
     if (!findId) {
@@ -105,9 +108,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     if (errorsArray.length > 0) {
         res
             .status(400)
-            .send({
-                errorsMessages: errorsArray
-            })
+            .send(errors)
         return;
     }
 

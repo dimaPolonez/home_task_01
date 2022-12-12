@@ -13,8 +13,6 @@ const newDateCreated = newDate.toISOString();
 
 const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString();
 
-
-
 let bdVideos = [
     {
         id: 1, title: "Video0", author: "Author0",
@@ -33,7 +31,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
 
-    if (!title || !title.trim() || typeof title !== "string") {
+    if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
         res
             .status(400)
             .send({
@@ -47,7 +45,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         return;
     }
 
-    if (!author || !author.trim() || typeof author !== "string") {
+    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
         res
             .status(400)
             .send({
@@ -103,7 +101,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
 
-    if (!title || !title.trim() || typeof title !== "string") {
+    if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
         res
             .status(400)
             .send({
@@ -117,7 +115,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
         return;
     }
 
-    if (!author || !author.trim() || typeof author !== "string") {
+    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
         res
             .status(400)
             .send({

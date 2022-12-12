@@ -23,6 +23,8 @@ let bdVideos = [
     }
 ]
 
+let errorsArray: any = [];
+
 app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
 })
@@ -32,6 +34,13 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const author = req.body.author;
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
+        errorsArray.push({message: "Incorrect values", field : "title"});
+    }
+
+    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
+        errorsArray.push({message: "Incorrect values", field : "author"});
+    }
+    if (errorsArray.length > 0) {
         res
             .status(400)
             .send({
@@ -45,19 +54,6 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         return;
     }
 
-    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
-        res
-            .status(400)
-            .send({
-                errorsMessages: [
-                    {
-                        "message": "Incorrect values",
-                        "field": "author"
-                    }
-                ]
-            })
-        return;
-    }
 
     const newVideo = {
         id: +(newDate),
@@ -102,6 +98,13 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const author = req.body.author;
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
+        errorsArray.push({message: "Incorrect values", field : "title"});
+    }
+
+    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
+        errorsArray.push({message: "Incorrect values", field : "author"});
+    }
+    if (errorsArray.length > 0) {
         res
             .status(400)
             .send({
@@ -109,20 +112,6 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
                     {
                         "message": "Incorrect values",
                         "field": "title"
-                    }
-                ]
-            })
-        return;
-    }
-
-    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
-        res
-            .status(400)
-            .send({
-                errorsMessages: [
-                    {
-                        "message": "Incorrect values",
-                        "field": "author"
                     }
                 ]
             })

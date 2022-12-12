@@ -16,8 +16,15 @@ const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOStri
 let errorsArray: any = [];
 
 
-let bdVideos: [{id: number, title: string, author: string, canBeDownloaded: boolean, minAgeRestriction: null,
-    createdAt: string, publicationDate: string, availableResolutions: Array<Object>}];
+let bdVideos = [
+    {
+        id: 1, title: "Video0", author: "Author0",
+        canBeDownloaded: false, minAgeRestriction: null,
+        createdAt: newDateCreated,
+        publicationDate: newDatePublic,
+        availableResolutions: ["P144"]
+    }
+]
 
 app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
@@ -46,7 +53,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
 
     if (errorsArray.length > 0 ) {
         res
-            .sendStatus(404)
+            .sendStatus(400)
             .send(
                 {"errorsMessages": errorsArray})
         return;
@@ -123,7 +130,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     if (errorsArray.length > 0 ) {
         res
-            .sendStatus(404)
+            .sendStatus(400)
             .send(
                 {"errorsMessages": errorsArray})
         return;
@@ -150,6 +157,8 @@ app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 })
 
 app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
+    bdVideos = []
+
     res.sendStatus(204)
 })
 

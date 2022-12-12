@@ -13,7 +13,7 @@ const newDateCreated = newDate.toISOString();
 
 const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString();
 
-/*const arrayType: Array<string> = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"];*/
+const arrayType: Array<string> = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"];
 
 let bdVideos = [
     {
@@ -41,13 +41,13 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
     const availableResolutions = req.body.availableResolutions;
-/*    let keyAvai = 0;
+    let keyAvai = 0;
 
     availableResolutions.forEach((a: string) => {
         if (arrayType.includes(a) === false) {
             keyAvai++;
         }
-    })*/
+    })
 
 
     errorsArray = [];
@@ -60,7 +60,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         errorsArray.push(errAuthor);
     }
 
-    if (!availableResolutions || !availableResolutions.trim()) {
+    if (keyAvai > 0) {
         errorsArray.push(errResolutions);
     }
 
@@ -126,7 +126,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
         errorsArray.push(errAuthor);
     }
 
-    if (!canBeDownloaded || !canBeDownloaded.trim()/* || typeof canBeDownloaded != "boolean"*/) {
+    if (typeof canBeDownloaded != "boolean") {
         errorsArray.push(errCanBeDownloaded);
     }
 

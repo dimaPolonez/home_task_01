@@ -160,7 +160,9 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 })
 
 app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
-    if (!req.params.id) {
+    let findId = bdVideos.find(v => v.id === +req.params.id)
+
+    if (!findId) {
         res.sendStatus(404)
         return;
     }

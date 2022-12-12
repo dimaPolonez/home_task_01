@@ -13,7 +13,7 @@ const newDateCreated = newDate.toISOString();
 
 const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString();
 
-let errorsArray: any = [];
+let errorsArray = [];
 
 
 let bdVideos = [

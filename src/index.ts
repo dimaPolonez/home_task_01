@@ -13,6 +13,8 @@ const newDateCreated = newDate.toISOString();
 
 const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString();
 
+const arrayType: Array<string> = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"];
+
 let bdVideos = [
     {
         id: 1, title: "Video0", author: "Author0",
@@ -29,6 +31,7 @@ let errors = { errorsMessages: errorsArray};
 const errTitle = {message: "Incorrect values", field : "title"};
 const errAuthor = {message: "Incorrect values", field : "author"};
 const errCanBeDownloaded = {message: "Incorrect values", field : "canBeDownloaded"};
+const errResolutions = {message: "Incorrect values", field : "availableResolutions"};
 
     app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
@@ -37,6 +40,15 @@ const errCanBeDownloaded = {message: "Incorrect values", field : "canBeDownloade
 app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
+    const availableResolutions = req.body.availableResolutions;
+    let keyAvai = 0;
+
+    availableResolutions.forEach((a: string) => {
+        if (arrayType.includes(a) === false) {
+            keyAvai++;
+        }
+    })
+
 
     errorsArray = [];
 
@@ -47,6 +59,12 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
         errorsArray.push(errAuthor);
     }
+
+    if (!availableResolutions || !availableResolutions.trim() || keyAvai > 0) {
+        errorsArray.push(errResolutions);
+    }
+
+
     if (errorsArray.length > 0) {
         errors = { errorsMessages: errorsArray};
         res

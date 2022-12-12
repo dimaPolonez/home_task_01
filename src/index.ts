@@ -13,7 +13,6 @@ const newDateCreated = newDate.toISOString();
 
 const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString();
 
-let errorsArray = [];
 
 
 let bdVideos = [
@@ -33,38 +32,32 @@ app.get('/', (req: Request, res: Response) => {
 app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
-    const availableResolutions = req.body.availableResolutions;
 
-    let counter = 0;
-
-    if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
-        counter++;
-        errorsArray.push({
-            message: "Incorrect title",
-            field: "title"
-        })
-    }
-
-    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
-        counter++;
-        errorsArray.push({
-            message: "Incorrect author",
-            field: "author"
-        })
-    }
-
-    if (!availableResolutions || !availableResolutions.trim()) {
-        counter++;
-        errorsArray.push({
-            message: "Incorrect availableResolutions",
-            field: "availableResolutions"
-        })
-    }
-
-    if (counter > 0 ) {
+    if (!title || !title.trim() || typeof title !== "string") {
         res
             .status(400)
-            .send("us")
+            .send({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "title"
+                    }
+                ]
+            })
+        return;
+    }
+
+    if (!author || !author.trim() || typeof author !== "string") {
+        res
+            .status(400)
+            .send({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "author"
+                    }
+                ]
+            })
         return;
     }
 
@@ -102,8 +95,6 @@ app.get('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     let findId = bdVideos.find(v => v.id === +req.params.id)
 
-    let counter = 0;
-
     if (!findId) {
         res.sendStatus(404)
         return;
@@ -111,37 +102,32 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     const title = req.body.title;
     const author = req.body.author;
-    const canBeDownloaded = req.body.canBeDownloaded;
 
-
-    if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
-        counter++;
-        errorsArray.push({
-            message: "Incorrect title",
-            field: "title"
-        })
-    }
-
-    if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
-        counter++;
-        errorsArray.push({
-            message: "Incorrect author",
-            field: "author"
-        })
-    }
-
-    if (!canBeDownloaded || !canBeDownloaded.trim() || !canBeDownloaded) {
-        counter++;
-        errorsArray.push({
-            message: "Incorrect canBeDownloaded",
-            field: "canBeDownloaded"
-        })
-    }
-
-    if (counter > 0) {
+    if (!title || !title.trim() || typeof title !== "string") {
         res
             .status(400)
-            .send("us")
+            .send({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "title"
+                    }
+                ]
+            })
+        return;
+    }
+
+    if (!author || !author.trim() || typeof author !== "string") {
+        res
+            .status(400)
+            .send({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "author"
+                    }
+                ]
+            })
         return;
     }
 

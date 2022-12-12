@@ -34,14 +34,14 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
     const availableResolutions = req.body.availableResolutions;
-    let availableFlag: boolean = true;
+    let availableFlag: boolean;
 
 
-    availableResolutions.forEach( (p:any) => {
+/*    availableResolutions.forEach( (p:any) => {
         if (p.charAt(0) != 'P') {
             availableFlag = false;
         }
-    })
+    })*/
 
     errorsArray = [];
 
@@ -137,7 +137,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
         })
     }
 
-    if (!canBeDownloaded || !canBeDownloaded.trim() || typeof canBeDownloaded !== "boolean") {
+    if (!canBeDownloaded || !canBeDownloaded.trim() || !canBeDownloaded) {
         errorsArray.push({
             message: "Incorrect canBeDownloaded",
             field: "canBeDownloaded"

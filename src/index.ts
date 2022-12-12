@@ -34,14 +34,6 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
     const availableResolutions = req.body.availableResolutions;
-    let availableFlag: boolean;
-
-
-/*    availableResolutions.forEach( (p:any) => {
-        if (p.charAt(0) != 'P') {
-            availableFlag = false;
-        }
-    })*/
 
     errorsArray = [];
 
@@ -60,7 +52,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         })
     }
 
-    if (!availableResolutions || !availableResolutions.trim() || !availableFlag) {
+    if (!availableResolutions || !availableResolutions.trim()) {
 
         errorsArray.push({
             message: "Incorrect availableResolutions",

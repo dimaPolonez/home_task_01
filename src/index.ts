@@ -13,7 +13,7 @@ const newDateCreated = newDate.toISOString();
 
 const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString();
 
-let errorsArray = [];
+let errorsArray: any = [];
 
 
 let bdVideos = [
@@ -34,8 +34,6 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
     const availableResolutions = req.body.availableResolutions;
-
-    errorsArray = [];
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
 
@@ -63,7 +61,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     if (errorsArray.length > 0 ) {
         res
             .status(400)
-            .send({"errorsMessages": errorsArray})
+            .json({"errorsMessages": errorsArray})
         return;
     }
 
@@ -139,7 +137,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     if (errorsArray.length > 0 ) {
         res
             .status(400)
-            .send({"errorsMessages": errorsArray})
+            .json({"errorsMessages": errorsArray})
         return;
     }
 

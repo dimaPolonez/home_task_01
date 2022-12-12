@@ -27,7 +27,8 @@ let errorsArray: Array<object> = [];
 let errors = { errorsMessages: errorsArray};
 
 const errTitle = {message: "Incorrect values", field : "title"};
-const errAuthor = {message: "Incorrect values", field : "title"};
+const errAuthor = {message: "Incorrect values", field : "author"};
+const errCanBeDownloaded = {message: "Incorrect values", field : "canBeDownloaded"};
 
     app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
@@ -97,6 +98,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     const title = req.body.title;
     const author = req.body.author;
+    const canBeDownloaded = req.body.canBeDownloaded;
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
         errorsArray.push(errTitle);
@@ -104,6 +106,10 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
     if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
         errorsArray.push(errAuthor);
+    }
+
+    if (!canBeDownloaded || !canBeDownloaded.trim() || typeof canBeDownloaded != "boolean") {
+        errorsArray.push(errCanBeDownloaded);
     }
 
     if (errorsArray.length > 0) {

@@ -24,7 +24,7 @@ let bdVideos = [
 ]
 
 let errorsArray: Array<object> = [];
-let errors = {errorsMessages: errorsArray};
+let errors = { errorsMessages: errorsArray};
 
 const errTitle = {message: "Incorrect values", field : "title"};
 const errAuthor = {message: "Incorrect values", field : "title"};
@@ -47,9 +47,10 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         errorsArray.push(errAuthor);
     }
     if (errorsArray.length > 0) {
+        errors = { errorsMessages: errorsArray};
         res
             .status(400)
-            .send(errors)
+            .json(errors)
         return;
     }
 
@@ -106,9 +107,10 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     }
 
     if (errorsArray.length > 0) {
+        errors = { errorsMessages: errorsArray};
         res
             .status(400)
-            .send(errors)
+            .json(errors)
         return;
     }
 

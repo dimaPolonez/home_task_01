@@ -33,6 +33,15 @@ app.get('/', (req: Request, res: Response) => {
 app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
+    const availableResolutions = req.body.availableResolutions;
+    let availableFlag: boolean = true;
+
+
+    availableResolutions.forEach( (p:any) => {
+        if (p.charAt(0) != 'P') {
+            availableFlag = false;
+        }
+    })
 
     errorsArray = [];
 
@@ -48,6 +57,14 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
         errorsArray.push({
             message: "Incorrect author",
             field: "author"
+        })
+    }
+
+    if (!availableResolutions || !availableResolutions.trim() || !availableFlag) {
+
+        errorsArray.push({
+            message: "Incorrect availableResolutions",
+            field: "availableResolutions"
         })
     }
 

@@ -33,24 +33,21 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const title = req.body.title;
     const author = req.body.author;
 
-    if (!title || !title.trim() || typeof title !== "string" || +(title.length) > 40) {
-        res
-            .status(400)
-            .send({
-                errorsMessages: [
-                    {
-                        "message": "Incorrect values",
-                        "field": "title"
-                    }
-                ]
-            })
-        return;
-    }
+    let errorsArray = [];
 
-    if (!author || !author.trim() || typeof author !== "string" || +(author.length) > 20) {
-        res
-            .status(400)
-            .send({
+    if (!title || !title.trim() || typeof title !== "string" || +(title.length) > 40) {
+
+        errorsArray.push({
+            errorsMessages: [
+                {
+                    "message": "Incorrect values",
+                    "field": "title"
+                }
+            ]
+        })
+
+        if (!author || !author.trim() || typeof author !== "string" || +(author.length) > 20) {
+            errorsArray.push({
                 errorsMessages: [
                     {
                         "message": "Incorrect values",
@@ -58,7 +55,50 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
                     }
                 ]
             })
-        return;
+
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        } else {
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        }
+    }
+
+    if (!author || !author.trim() || typeof author !== "string" || +(author.length) > 20) {
+
+        errorsArray.push({
+            errorsMessages: [
+                {
+                    "message": "Incorrect values",
+                    "field": "author"
+                }
+            ]
+        })
+
+        if (!title || !title.trim() || typeof title !== "string" || +(title.length) > 40) {
+            errorsArray.push({
+                errorsMessages: [
+                    {
+                        "message": "Incorrect values",
+                        "field": "title"
+                    }
+                ]
+            })
+
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        } else {
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        }
     }
 
     const newVideo = {
@@ -94,6 +134,7 @@ app.get('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 
 app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     let findId = bdVideos.find(v => v.id === +req.params.id)
+    let errorsArray = [];
 
     if (!findId) {
         res.sendStatus(404)
@@ -105,23 +146,18 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const canBeDownloaded = req.body.canBeDownloaded;
 
     if (!title || !title.trim() || typeof title !== "string" || +(title.length) > 40) {
-        res
-            .status(400)
-            .send({
-                errorsMessages: [
-                    {
-                        "message": "Incorrect values",
-                        "field": "title"
-                    }
-                ]
-            })
-        return;
-    }
 
-    if (!author || !author.trim() || typeof author !== "string" +(author.length) > 20) {
-        res
-            .status(400)
-            .send({
+        errorsArray.push({
+            errorsMessages: [
+                {
+                    "message": "Incorrect values",
+                    "field": "title"
+                }
+            ]
+        })
+
+        if (!author || !author.trim() || typeof author !== "string" || +(author.length) > 20) {
+            errorsArray.push({
                 errorsMessages: [
                     {
                         "message": "Incorrect values",
@@ -129,20 +165,65 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
                     }
                 ]
             })
-        return;
+
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        } else {
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        }
     }
 
-    if (!canBeDownloaded || !canBeDownloaded.trim() || typeof canBeDownloaded !== "boolean") {
-        res
-            .status(400)
-            .send({
+    if (!author || !author.trim() || typeof author !== "string" || +(author.length) > 20) {
+
+        errorsArray.push({
+            errorsMessages: [
+                {
+                    "message": "Incorrect values",
+                    "field": "author"
+                }
+            ]
+        })
+
+        if (!title || !title.trim() || typeof title !== "string" || +(title.length) > 40) {
+            errorsArray.push({
                 errorsMessages: [
                     {
                         "message": "Incorrect values",
-                        "field": "canBeDownloaded"
+                        "field": "title"
                     }
                 ]
             })
+
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        } else {
+            res
+                .status(400)
+                .send(errorsArray)
+            return;
+        }
+    }
+
+    if (!canBeDownloaded || !canBeDownloaded.trim() || typeof canBeDownloaded !== "boolean") {
+        errorsArray.push({
+            errorsMessages: [
+                {
+                    "message": "Incorrect values",
+                    "field": "canBeDownloaded"
+                }
+            ]
+        })
+
+        res
+            .status(400)
+            .send(errorsArray)
         return;
     }
 

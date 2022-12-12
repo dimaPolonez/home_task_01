@@ -35,8 +35,10 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     const author = req.body.author;
     const availableResolutions = req.body.availableResolutions;
 
-    if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
+    let counter = 0;
 
+    if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
+        counter++;
         errorsArray.push({
             message: "Incorrect title",
             field: "title"
@@ -44,6 +46,7 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     }
 
     if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
+        counter++;
         errorsArray.push({
             message: "Incorrect author",
             field: "author"
@@ -51,17 +54,17 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     }
 
     if (!availableResolutions || !availableResolutions.trim()) {
-
+        counter++;
         errorsArray.push({
             message: "Incorrect availableResolutions",
             field: "availableResolutions"
         })
     }
 
-    if (errorsArray.length > 0 ) {
+    if (counter > 0 ) {
         res
             .status(400)
-            .json({"errorsMessages": errorsArray})
+            .send({"errorsMessages": errorsArray})
         return;
     }
 
@@ -99,6 +102,7 @@ app.get('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     let findId = bdVideos.find(v => v.id === +req.params.id)
 
+    let counter = 0;
 
     if (!findId) {
         res.sendStatus(404)
@@ -109,11 +113,9 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     const author = req.body.author;
     const canBeDownloaded = req.body.canBeDownloaded;
 
-    errorsArray = [];
-
 
     if (!title || !title.trim() || typeof title !== "string" || title.length > 40) {
-
+        counter++;
         errorsArray.push({
             message: "Incorrect title",
             field: "title"
@@ -121,6 +123,7 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     }
 
     if (!author || !author.trim() || typeof author !== "string" || author.length > 20) {
+        counter++;
         errorsArray.push({
             message: "Incorrect author",
             field: "author"
@@ -128,13 +131,14 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     }
 
     if (!canBeDownloaded || !canBeDownloaded.trim() || !canBeDownloaded) {
+        counter++;
         errorsArray.push({
             message: "Incorrect canBeDownloaded",
             field: "canBeDownloaded"
         })
     }
 
-    if (errorsArray.length > 0 ) {
+    if (counter > 0) {
         res
             .status(400)
             .json({"errorsMessages": errorsArray})

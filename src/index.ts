@@ -54,25 +54,24 @@ app.post('/hometask_01/api/videos', (req: Request, res: Response) => {
     if (errorsArray.length > 0 ) {
         res
             .status(400)
-            .send(
-                {"errorsMessages": errorsArray})
+            .send({"errorsMessages": errorsArray})
         return;
+    } else {
+        const newVideo = {
+            id: +(newDate),
+            title: req.body.title, author: req.body.author,
+            canBeDownloaded: false, minAgeRestriction: null,
+            createdAt: newDateCreated,
+            publicationDate: newDatePublic,
+            availableResolutions: req.body.availableResolutions
+        }
+
+        bdVideos.push(newVideo)
+
+        res
+            .status(201)
+            .json(newVideo)
     }
-
-    const newVideo = {
-        id: +(newDate),
-        title: req.body.title, author: req.body.author,
-        canBeDownloaded: false, minAgeRestriction: null,
-        createdAt: newDateCreated,
-        publicationDate: newDatePublic,
-        availableResolutions: req.body.availableResolutions
-    }
-
-    bdVideos.push(newVideo)
-
-    res
-        .status(201)
-        .json(newVideo)
 })
 
 app.get('/hometask_01/api/videos', (req: Request, res: Response) => {
@@ -131,18 +130,17 @@ app.put('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
     if (errorsArray.length > 0 ) {
         res
             .status(400)
-            .send(
-                {"errorsMessages": errorsArray})
+            .send({"errorsMessages": errorsArray})
         return;
+    } else {
+        findId.title = req.body.title
+        findId.author = req.body.author
+        findId.availableResolutions = req.body.availableResolutions
+        findId.canBeDownloaded = req.body.canBeDownloaded
+        findId.minAgeRestriction = req.body.minAgeRestriction
+        findId.publicationDate = req.body.publicationDate
+        res.sendStatus(204)
     }
-
-    findId.title = req.body.title
-    findId.author = req.body.author
-    findId.availableResolutions = req.body.availableResolutions
-    findId.canBeDownloaded = req.body.canBeDownloaded
-    findId.minAgeRestriction = req.body.minAgeRestriction
-    findId.publicationDate = req.body.publicationDate
-    res.sendStatus(204)
 })
 
 app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {

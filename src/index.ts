@@ -16,15 +16,8 @@ const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOStri
 let errorsArray: any = [];
 
 
-let bdVideos = [
-    {
-        id: 1, title: "Video0", author: "Author0",
-        canBeDownloaded: false, minAgeRestriction: null,
-        createdAt: newDateCreated,
-        publicationDate: newDatePublic,
-        availableResolutions: ["P144"]
-    }
-]
+let bdVideos: [{id: number, title: string, author: string, canBeDownloaded: boolean, minAgeRestriction: null,
+    createdAt: string, publicationDate: string, availableResolutions: Array<Object>}];
 
 app.get('/', (req: Request, res: Response) => {
     res.json('Hello, server start!')
@@ -157,8 +150,6 @@ app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 })
 
 app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
-    bdVideos = []
-
     res.sendStatus(204)
 })
 
